@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- mapper file: 실행 할 쿼리 문을 저장하는 파일. 테이블 하나당 한개씩 작성 namespace: 작업하는 테이블들을 
+	구분해주기 위한 식별자 -->
+<mapper namespace="qna">
+
+	<!-- 리절트 맵 정의 : select 한 후의 결과 처리를 위해 정의 해 놓음 -->
+	 <resultMap id="qnaResult" type="qna">
+		<result property="num" column="num" />
+		<result property="pass" column="pass" />
+		<result property="name" column="name" />
+		<result property="wdate" column="wdate" />
+		<result property="title" column="title" />
+		<result property="content" column="content" />
+		<result property="ans" column="ans" />
+	</resultMap>
+
+	<select id="selectAll" resultType="qna">
+		select * from qna
+	</select>
+
+	<select id="selectOne" parameterType="java.lang.String"
+		resultType="qna">
+		select * from qna where num = #{num}
+	</select>
+
+	<insert id="insert" parameterType="qna">
+		insert into qna values(null, #{pass}, #{name}, sysdate(), #{title}, #{content}, "아직 답변이 없습니다")  
+	</insert>
+
+	<update id="update" parameterType="map">
+		update qna set ans = #{ans} where num = #{num}
+	</update>
+
+	<delete id="delete" parameterType="java.lang.String">
+		delete from qna where num = #{num}
+	</delete>
+
+	<select id="findByTitle" parameterType="java.lang.String"
+		resultMap="qnaResult">
+		select * from qna where title = #{title}
+	</select>
+
+	<select id="findByName" parameterType="java.lang.String"
+		resultMap="qnaResult">
+		select * from qna where name = #{name}
+	</select> 
+
+</mapper>
+
+
+
+
+
+
