@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,20 +30,20 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 
-@CrossOrigin(origins = { "*" }, maxAge = 6000)
-@RestController
+
 @Api("Qna Rest API")
-@RequestMapping(value="safefood/")
-public class RestQnAController extends HttpServlet {
+@Controller
+public class RestQnAController  {
 	private static final long serialVersionUID = 1L;
    
 	@Autowired
 	private QnaService qnaServece;
 	
-	@RequestMapping(value = "test", method=RequestMethod.GET)
-	public String welcome() {
-		return "test";
+	@RequestMapping("/test") 
+	public String welcome() { 
+		return "test"; 
 	}
+
 	@RequestMapping(value="qna", method=RequestMethod.POST)
 	@ApiOperation("질문 등록")
 	public Map RegQna(@RequestBody Qna qna) throws Exception {
