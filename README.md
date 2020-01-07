@@ -1,2 +1,2 @@
 # spring-study
-spring-only-study.
+spring-only-study
