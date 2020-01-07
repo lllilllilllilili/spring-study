@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.service.QnaService;
@@ -30,9 +31,11 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 
-
-@Api("Qna Rest API")
+@CrossOrigin(origins = { "*" }, maxAge = 6000)
 @Controller
+@ResponseBody
+@Api("Qna Rest API")
+
 public class RestQnAController  {
 	private static final long serialVersionUID = 1L;
    
@@ -70,6 +73,18 @@ public class RestQnAController  {
 		System.out.println("adsfasdf");
 		return qnaServece.selectAll();
 	}
+	
+	@RequestMapping(value="qnacomment/{num}/{ans}", method=RequestMethod.PUT)
+	@ApiOperation("질문 comment")
+	public Map<String, String> updateComment(@PathVariable String num, @PathVariable String ans) {
+		System.out.println(ans+" "+num);
+		qnaServece.updateComment(num,ans);
+		HashMap<String, String> map = new HashMap<String, String>();
+		System.out.println("hi-comment");
+		map.put("result", "수정성공");
+		return map;
+	}
+	
 	
 	@RequestMapping(value="qna/{num}", method=RequestMethod.GET)
 	@ApiOperation("질문 하나 선택")

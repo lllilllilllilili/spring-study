@@ -55,6 +55,13 @@ public class QnaServiceImpl implements QnaService {
 		qao.update(num,ans);
 	}
 
+	@Override
+	public void updateComment(String num, String ans) {
+		// TODO Auto-generated method stub
+		
+		qao.update(num,ans);
+	}
+
 	
 
 }

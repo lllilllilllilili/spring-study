@@ -16,6 +16,7 @@ public interface QnaService {
 	public void insert2(Qna c) throws Exception;
 	public void delete(String num);
 	public void update(String num,String ans);
+	public void updateComment(String num, String ans);
 	public List<Qna> findByTitle(String title);
 	public List<Qna> findByName(String name);
 	
