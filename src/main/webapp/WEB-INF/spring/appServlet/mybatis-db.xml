@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd">
+
+
+
+	<import resource="db.xml" />
+	<context:component-scan
+		base-package="com.safe.service"></context:component-scan>
+	<context:component-scan
+		base-package="com.safe.dao"></context:component-scan> 
+		<!-- 해당 패키지 뒤져서 어노테이션 확인함 -->
+	<!-- service 객체, dao 객체 생성 annnotation 으로 생성되게 함 -->
+
+	<!-- <bean id = ""></bean> 대신 compenent 씀!! -->
+
+	<!-- sqlSessionFactory ,SqlSession 객체 생성 -->
+	<bean id="sqlSessionFactory"
+		class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="ds" />
+		<property name="mapperLocations"
+			value="classpath*:config/*query.xml"></property>
+		<property name="typeAliasesPackage" value="com.safe.vo" />
+	</bean>
+	
+
+	<bean id="sqlSession"
+		class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sqlSessionFactory"></constructor-arg>
+	</bean>
+
+
+	<tx:annotation-driven
+		transaction-manager="transactionManager" />
+	<!-- transaction 관리자 객체 생성 -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="ds"></property>
+	</bean>
+	
+</beans>

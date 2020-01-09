@@ -7,15 +7,10 @@
 		     사용할  VO 클래스에 대한 별칭 설정 
 		  Java AIP에 대한 별칭 설정 정보 : org.apache.ibits.type.TypeAliasRegistry 
 		  -->
-		<typeAlias type="com.safe.vo.Member"   		    alias="member"/>
-		<typeAlias type="com.safe.vo.FoodInfo"   		alias="foodinfo"/>
-		<typeAlias type="com.safe.vo.FoodList"   		alias="foodlist"/>
-		
+		<typeAlias type="com.vo.Qna"	alias="qna"/>
 	</typeAliases>
 	<mappers>
-	 <mapper resource="config/member_query.xml" />
-	 <mapper resource="config/food_query.xml" />
-	 <mapper resource="config/foodlist_query.xml" />
+	 <mapper resource="config/QnaMapper.xml" />
 	</mappers>
 </configuration>
 
